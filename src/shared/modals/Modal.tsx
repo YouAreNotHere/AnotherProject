@@ -3,11 +3,11 @@ import { GoX } from "react-icons/go";
 import {useEffect} from "react";
 
 interface Props {
-    children? : any
+    children? : React.ReactNode
     setIsModalOpen: React.Dispatch<boolean>
     isModalOpen: boolean
 }
-const Modal = ({ children, setIsModalOpen, isModalOpen }: Props) => {
+const Modal: React.FC<Props> = ({ children, setIsModalOpen, isModalOpen }: Props) => {
 
     useEffect(()=> {
         if (!isModalOpen) return

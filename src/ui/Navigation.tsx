@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
-import SearchBar from "../SearchBar/SearchBar.tsx";
+import SearchBar from "../components/SearchBar.tsx";
 
 
 const Navigation = () => {

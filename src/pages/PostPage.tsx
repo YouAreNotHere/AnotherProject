@@ -1,16 +1,13 @@
 import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 
-import CommentsList from "../components/CommentsList/CommentsList.tsx";
-import Error from "../shared/features/Error.tsx";
+import CommentsList from "../components/CommentsList.tsx";
+import Error from "../shared/service/Error.tsx";
 import PostItemSkeleton from "../shared/skeletons/PostItemSkeleton.tsx";
 import getPost from "../shared/api/getPost.tsx";
 import {useEffect, useMemo, useState} from "react";
 import {animated, useTransition} from "react-spring";
-import PostsListSkeleton from "../shared/skeletons/PostsListSkeleton.tsx";
-import NoResults from "../shared/features/NoResults.tsx";
-import type {Post} from "../shared/types/IPost.ts";
-import PostCard from "../components/PostCard/PostCard.tsx";
+import NoResults from "../shared/service/NoResults.tsx";
 
 const PostPage = () => {
     const { id } = useParams();
@@ -35,7 +32,7 @@ const PostPage = () => {
             if (!data && !isLoading && !error ) return "no results";
             if (data && id) return "post";
         }
-        ,[showSkeleton, isLoading, data, error])
+        ,[showSkeleton, isLoading, data, error, id])
 
     const transitions = useTransition(currentView, {
         from: {opacity: 0, transform: "translateY(10px)",},

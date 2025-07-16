@@ -1,4 +1,4 @@
-import PostsList from "../components/PostsList/PostsList.tsx";
+import PostsList from "../components/PostsList.tsx";
 const MainPage = () => {
 
 

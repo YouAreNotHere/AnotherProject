@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-const Dropdown = ({children, isDropdownOpen} : {children: any, isDropdownOpen: boolean}) => {
+const Dropdown = ({children, isDropdownOpen} : {children: React.ReactNode, isDropdownOpen: boolean}) => {
 
     useEffect(()=> {
         if (!isDropdownOpen) return

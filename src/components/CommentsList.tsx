@@ -1,16 +1,16 @@
-import {useInfiniteQuery, useQueryClient} from "@tanstack/react-query";
+import {useInfiniteQuery} from "@tanstack/react-query";
 import {useEffect, useMemo, useState} from "react";
 
-import type {Comment} from "../../shared/types/IComment.ts";
+import type {Comment} from "../shared/types/IComment.ts";
 
-import CommentItem from "../CommentItem.tsx";
-import useInfiniteScroll from "../../shared/features/useInfiniteScroll.tsx";
-import CommentsListSkeleton from "../../shared/skeletons/CommentsListSkeleton.tsx";
-import Error from "../../shared/features/Error.tsx";
-import EndOfContent from "../../shared/features/EndOfContent.tsx";
-import getComments from "../../shared/api/getComments.tsx";
+import CommentItem from "./CommentItem.tsx";
+import useInfiniteScroll from "../shared/features/useInfiniteScroll.tsx";
+import CommentsListSkeleton from "../shared/skeletons/CommentsListSkeleton.tsx";
+import Error from "../shared/service/Error.tsx";
+import EndOfContent from "../shared/service/EndOfContent.tsx";
+import getComments from "../shared/api/getComments.tsx";
 import {animated, useTransition} from "react-spring";
-import NoResults from "../../shared/features/NoResults.tsx";
+import NoResults from "../shared/service/NoResults.tsx";
 import { toast } from 'react-toastify';
 
 const CommentsList = ({postId, isModal=false} : {postId: string, isModal?: boolean}) => {
@@ -21,12 +21,17 @@ const CommentsList = ({postId, isModal=false} : {postId: string, isModal?: boole
         queryFn: ({pageParam})=> getComments(pageParam, postId),
         getNextPageParam: (lastPage) => lastPage.nextCursor,
         initialPageParam: 1,
-        // enabled: isModal && !!postId,
     })
 
-    if (error) {
-        toast.error("Ошибка загрузки постов");
-    }
+    useEffect(() => {
+        if (!isLoading && error) {
+            toast.error(`Ошибка при загрузке комментариев: ${error.message}`);
+        }
+
+        if (data && !hasNextPage && !isLoading && !error){
+            toast.success(`Комментарии поста ${postId} загружены`);
+        }
+    }, [isLoading, error, data, postId, hasNextPage]);
 
     const allComments: Comment[] = useMemo(
         ()=> data?.pages.flatMap((page)=> page.data) || []
@@ -84,7 +89,7 @@ const CommentsList = ({postId, isModal=false} : {postId: string, isModal?: boole
                             </animated.div>
                         )
                     case "comments":
-                        toast("Данные загружены")
+                        // toast.success("Данные загружены")
                         return (
                             <animated.div style={style}>
                                 <ul className={`flex flex-col gap-[15px] ${isModal && "max-w-[90%] m-auto"}`}>

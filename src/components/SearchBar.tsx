@@ -1,9 +1,9 @@
-import useStore from "../../shared/store/store.ts";
+import useStore from "../shared/store/store.ts";
 import { useState, useMemo } from "react";
 import {useLocation} from "react-router-dom";
 import { GoSearch, GoX } from "react-icons/go";
-import PostsList from "../PostsList/PostsList.tsx";
-import Dropdown from "../Dropdown.tsx";
+import PostsList from "./PostsList.tsx";
+import Dropdown from "../shared/modals/Dropdown.tsx";
 
 const SearchBar = () => {
     const { text, setText, resetText } = useStore();
@@ -11,8 +11,6 @@ const SearchBar = () => {
 
     const location = useLocation();
     const isHomePage = location.pathname === "/";
-    // const openDropdown = (!isHomePage && !!text.trim());
-    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const isDropdownOpen = useMemo(()=> {
         return isFocused && !!text.trim() && !isHomePage

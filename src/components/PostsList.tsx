@@ -1,15 +1,15 @@
-import PostCard from "../PostCard/PostCard.tsx";
+import PostCard from "./PostCard.tsx";
 
-import type {Post} from "../../shared/types/IPost.ts";
-import useStore from "../../shared/store/store.ts";
+import type {Post} from "../shared/types/IPost.ts";
+import useStore from "../shared/store/store.ts";
 import {useInfiniteQuery} from "@tanstack/react-query";
-import getPosts from "../../shared/api/getPosts.tsx";
+import getPosts from "../shared/api/getPosts.tsx";
 import {useEffect, useMemo, useState} from "react";
-import useInfiniteScroll from "../../shared/features/useInfiniteScroll.tsx";
-import PostsListSkeleton from "../../shared/skeletons/PostsListSkeleton.tsx";
-import NoResults from "../../shared/features/NoResults.tsx";
-import EndOfContent from "../../shared/features/EndOfContent.tsx";
-import Error from "../../shared/features/Error.tsx";
+import useInfiniteScroll from "../shared/features/useInfiniteScroll.tsx";
+import PostsListSkeleton from "../shared/skeletons/PostsListSkeleton.tsx";
+import NoResults from "../shared/service/NoResults.tsx";
+import EndOfContent from "../shared/service/EndOfContent.tsx";
+import Error from "../shared/service/Error.tsx";
 import {useTransition, animated} from "react-spring";
 
 const PostsList= ({isDropdown = false} : {isDropdown?: boolean}) => {

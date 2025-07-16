@@ -10,7 +10,7 @@ const TruncatedText
     const [isCollapsed, setIsCollapsed] = useState(true);
 
     const splitedText = text.split(" ");
-    if (splitedText.length <= textLimit || !isCollapsed) return  <p>{text}</p>;
+    if (splitedText.length <= textLimit || !isCollapsed) return  <p className={"text-start"}>{text}</p>;
     return (
         <p className={"text-start"}>
             {splitedText.slice(0, textLimit).join(" ") + " "}

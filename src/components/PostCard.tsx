@@ -1,9 +1,9 @@
-import type {Post} from "../../shared/types/IPost.ts";
+import type {Post} from "../shared/types/IPost.ts";
 import { GoComment } from "react-icons/go";
 import { GoLinkExternal } from "react-icons/go";
 import {useState} from "react";
-import Modal from "../modal/Modal.tsx";
-import CommentsList from "../CommentsList/CommentsList.tsx";
+import Modal from "../shared/modals/Modal.tsx";
+import CommentsList from "./CommentsList.tsx";
 
 const PostCard = ({post, isDropdown=false}: {post: Post, isDropdown?: boolean}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
